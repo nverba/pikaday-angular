@@ -14,7 +14,9 @@ angular-pikaday
 ------------------------------------------------------------
 
 
-angular-pikaday is yet another AngularJS Directive for Pikaday. It aims to make deploying and configuring date pickers as simple as possible. Most of Pikaday's config options can be passed as attributes in the HTML element. The assigned angular model exposes the Pikaday object directly, allowing for easy manipulation of the datepicker.
+### angular-pikaday is yet another AngularJS Directive for Pikaday.
+
+It aims to make deploying and configuring date pickers as simple as possible. Most of Pikaday's config options can be passed as attributes in the HTML element. The assigned angular model exposes the Pikaday object directly, allowing for easy manipulation of the datepicker.
 
 #### Basic example
 
