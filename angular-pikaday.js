@@ -13,6 +13,7 @@ app.directive('pikaday', function() {
         field: elem[0],
         trigger: document.getElementById(attrs.triggerId),
         bound: attrs.bound !== 'false',
+        position: attrs.position || '',
         format: attrs.format || 'ddd MMM D YYYY', // Requires Moment.js for custom formatting
         defaultDate: new Date(attrs.defaultDate),
         setDefaultDate: attrs.setDefaultDate === 'true',
@@ -31,7 +32,6 @@ app.directive('pikaday', function() {
         yearSuffix: attrs.yearSuffix || '',
         showMonthAfterYear: attrs.showMonthAfterYear === 'true',
 
-        // Update scope whenever new date selected
         onSelect: function () {
           setTimeout(function(){
             scope.$apply();
