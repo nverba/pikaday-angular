@@ -6,50 +6,55 @@ __Pikaday__ [source code & documentation](https://github.com/dbushell/Pikaday)
 
 __angular-pikaday__ [working examples & documentation](http://nverba.github.io/angular-pikaday/)
 
-```
-'use strict';
 
-app.directive('pikaday', function() {
-  return {
-    restrict: 'A',
-    scope: {
-      pikaday: '=',
-    },
-    link: function (scope, elem, attrs) {
+----------------------------------------
 
-      var picker = new Pikaday({
 
-        field: elem[0],
-        trigger: document.getElementById(attrs.triggerId),
-        bound: attrs.bound !== 'false',
-        position: attrs.position || '',
-        format: attrs.format || 'ddd MMM D YYYY', // Requires Moment.js for custom formatting
-        defaultDate: new Date(attrs.defaultDate),
-        setDefaultDate: attrs.setDefaultDate === 'true',
-        firstDay: attrs.firstDay ? parseInt(attrs.firstDay) : 0,
-        minDate: new Date(attrs.minDate),
-        maxDate: new Date(attrs.maxDate),
-        yearRange: attrs.yearRange ? JSON.parse(attrs.yearRange) : 10, // Accepts int (10) or 2 elem array ([1992, 1998]) as strings
-        isRTL: attrs.isRTL === 'true',
-        i18n: {
-          previousMonth : 'Previous Month',
-          nextMonth     : 'Next Month',
-          months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
-          weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-          weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-        },
-        yearSuffix: attrs.yearSuffix || '',
-        showMonthAfterYear: attrs.showMonthAfterYear === 'true',
+## Basic usage
 
-        onSelect: function () {
-          setTimeout(function(){
-            scope.$apply();
-          });
-        }
-      });
-      scope.pikaday = picker;
-    }
-  };
-});
+
+Include the `pikaday` attribute and assign a scope.
+
+``` language-HTML
+<input pikaday="myPickerObject">
 
 ```
+
+The date string returned to the input field will be pre-formatted by __Pikaday__, although formatting can be configured manually with the `format` attribute, if __moment.js__ is included.
+
+
+
+## Methods
+
+__angular-pikaday__ binds the Pikaday picker object to the named scope and supports several methods for retrieving and updating the date.
+
+For example, the `myPickerObject.getDate()` method can be user to retrieve a JavaScript Date object, which can easily be formatted using Angular.js' built in formatters.
+
+
+```
+<span> Date = {{ myPickerObject.getDate() | date:'MM/dd/yyyy' }}</span>
+
+```
+
+To see a complete list of methods available to the Pikaday object, check out the [Pikaday README on Github](https://github.com/dbushell/Pikaday).
+
+## Available attributes
+
+__angular-pikaday__ accepts most of Pikaday's configuration options as HTML attributes.
+
+- `trigger` use a different element to trigger opening the datepicker, see trigger example (defaults to directive DOM element)
+- `bound` automatically show/hide the datepicker on field focus (default true)
+- `position` preferred position of the datepicker relative to the form field, e.g.: top right, bottom right Note: automatic adjustment may occur to avoid datepicker from being displayed outside the viewport.
+- `format` the default output format for .toString() and field value (requires Moment.js for custom formatting)
+- `default-date` the initial date to view when first opened
+- `set-default-date` make the defaultDate the initial selected value
+- `first-day` first day of the week (0: Sunday, 1: Monday, etc)
+- `min-date` the minimum/earliest date that can be selected
+- `max-date` the maximum/latest date that can be selected
+- `year-range` number of years either side of the year select drop down (e.g. 10) or array of upper/lower range (e.g. [1900,2012])
+- `is-r-t-l` reverse the calendar for right-to-left languages (default false)
+- `year-suffix` additional text to append to the year in the title
+- `show-month-after-year` render the month after year in the title (default false)
+
+
+Check out the [demo](http://nverba.github.io/angular-pikaday/) for some other examples.
