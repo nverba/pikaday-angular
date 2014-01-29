@@ -1,5 +1,7 @@
 'use strict';
 
+// Change 'app' to match the name of your Angular module or application...
+
 app.directive('pikaday', function() {
   return {
     restrict: 'A',
