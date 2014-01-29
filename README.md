@@ -17,7 +17,6 @@ Include the `pikaday` attribute and assign a scope.
 
 ``` language-HTML
 <input pikaday="myPickerObject">
-
 ```
 
 The date string returned to the input field will be pre-formatted by __Pikaday__, although formatting can be configured manually with the `format` attribute, if __moment.js__ is included.
@@ -33,7 +32,6 @@ For example, the `myPickerObject.getDate()` method can be user to retrieve a Jav
 
 ```
 <span> Date = {{ myPickerObject.getDate() | date:'MM/dd/yyyy' }}</span>
-
 ```
 
 To see a complete list of methods available to the Pikaday object, check out the [Pikaday README on Github](https://github.com/dbushell/Pikaday).
