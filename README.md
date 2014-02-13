@@ -12,7 +12,6 @@ Include the `angularPikaday` module as a dependency.
 
 ```
 app = angular.module('YourApp', ['angularPikaday'])
-
 ```
 
 Include the `pikaday` attribute and assign a scope.
