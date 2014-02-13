@@ -8,6 +8,12 @@ __angular-pikaday__ is an AngularJS directive wraper that aims to make using __P
 
 ## Basic usage
 
+Include the `angularPikaday` module as a dependency.
+
+```
+app = angular.module('YourApp', ['angularPikaday'])
+
+```
 
 Include the `pikaday` attribute and assign a scope.
 
