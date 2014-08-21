@@ -40,6 +40,10 @@ angular.module('angularPikaday', [])
         }
       });
       scope.pikaday = picker;
+
+      scope.$on('$destroy', function () {
+        picker.destroy();
+      });
     }
   };
 });
