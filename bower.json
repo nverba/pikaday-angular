@@ -18,6 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/nverba/pikaday-angular",
   "dependencies": {
+    "angular": ">=1.2.0",
     "pikaday": "~1.2.0"
   }
 }
