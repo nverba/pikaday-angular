@@ -1,7 +1,7 @@
-## __angular-pikaday__ [working examples](http://nverba.github.io/angular-pikaday/)
+## __pikaday-angular__ [working examples](http://nverba.github.io/pikaday-angular/)
 Tested and working with [Pikaday Release version 1.2.0](https://github.com/dbushell/Pikaday/releases/tag/1.2.0)
 
-__angular-pikaday__ is an AngularJS directive wraper that aims to make using __Pikaday__ with __Angular__ as simple as possible, exposing __Pikaday's__ configurable features as HTML attributes, handled by the directive.
+__pikaday-angular__ is an AngularJS directive wraper that aims to make using __Pikaday__ with __Angular__ as simple as possible, exposing __Pikaday's__ configurable features as HTML attributes, handled by the directive.
 
 ### __Pikaday__ [source code & documentation](https://github.com/dbushell/Pikaday)
 
@@ -26,7 +26,7 @@ The date string returned to the input field will be pre-formatted by __Pikaday__
 
 ## Methods
 
-__angular-pikaday__ binds the Pikaday picker object to the named scope and supports several methods for retrieving and updating the date.
+__pikaday-angular__ binds the Pikaday picker object to the named scope and supports several methods for retrieving and updating the date.
 
 For example, the `myPickerObject.getDate()` method can be user to retrieve a JavaScript Date object, which can easily be formatted using Angular.js' built in formatters.
 
@@ -39,7 +39,7 @@ To see a complete list of methods available to the __Pikaday__ object, check out
 
 ## Available attributes
 
-__angular-pikaday__ accepts most of __Pikaday's__ configuration options as HTML attributes.
+__pikaday-angular__ accepts most of __Pikaday's__ configuration options as HTML attributes.
 
 - `trigger` use a different element to trigger opening the datepicker, see trigger example (defaults to directive DOM element)
 - `bound` automatically show/hide the datepicker on field focus (default true)
@@ -56,4 +56,4 @@ __angular-pikaday__ accepts most of __Pikaday's__ configuration options as HTML 
 - `show-month-after-year` render the month after year in the title (default false)
 
 
-Check out the [demo](http://nverba.github.io/angular-pikaday/) for some other examples.
+Check out the [demo](http://nverba.github.io/pikaday-angular/) for some other examples.
