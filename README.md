@@ -22,6 +22,26 @@ Include the `pikaday` attribute and assign a scope.
 
 The date string returned to the input field will be pre-formatted by __Pikaday__, although formatting can be configured manually with the `format` attribute, if __moment.js__ is included.
 
+## i18n
+
+If you want to customize the used wordings, you can inject a custom object via the `pikadayProvider`.
+
+Example:
+
+```
+angular.module('YourApp', ['angularPikaday'])
+  .config(['pikadayProvider', function(pikadayProvider) {
+    pikadayProvider.setConfig({
+      i18n: {
+        previousMonth : 'Previous Month',
+        nextMonth     : 'Next Month',
+        months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+      }
+  })
+}])
+```
 
 
 ## Methods

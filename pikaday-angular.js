@@ -1,7 +1,19 @@
 'use strict';
 
 angular.module('angularPikaday', [])
-  .directive('pikaday', function() {
+  .provider('pikaday', function() {
+    var config = {};
+
+    this.$get = function() {
+      return config;
+    };
+
+    this.setConfig = function setConfig(pikadayConfig) {
+      config = pikadayConfig;
+    };
+
+  })
+  .directive('pikaday', ['pikaday', function(pikaday) {
   return {
     restrict: 'A',
     scope: {
@@ -23,7 +35,7 @@ angular.module('angularPikaday', [])
         maxDate: new Date(attrs.maxDate),
         yearRange: attrs.yearRange ? JSON.parse(attrs.yearRange) : 10, // Accepts int (10) or 2 elem array ([1992, 1998]) as strings
         isRTL: attrs.isRTL === 'true',
-        i18n: {
+        i18n: pikaday.i18n || {
           previousMonth : 'Previous Month',
           nextMonth     : 'Next Month',
           months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -46,4 +58,4 @@ angular.module('angularPikaday', [])
       });
     }
   };
-});
+}]);
