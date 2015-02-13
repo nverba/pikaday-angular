@@ -75,5 +75,12 @@ __pikaday-angular__ accepts most of __Pikaday's__ configuration options as HTML 
 - `year-suffix` additional text to append to the year in the title
 - `show-month-after-year` render the month after year in the title (default false)
 
+In addition a custom `onSelect` handler can be passed - it is invoked
+with the `Pikaday` instance as sole argument.
+
+```html
+<input pikaday="myPickerObject" on-select="onPikadaySelect(pikaday)">
+```
+
 
 Check out the [demo](http://nverba.github.io/pikaday-angular/) for some other examples.
