@@ -2,21 +2,26 @@
 
   'use strict';
 
-  angular.module('angularPikaday', [])
-    .provider('pikaday', function() {
+  angular.module('angularPikaday', []);
 
-      var config = {};
+  angular.module('angularPikaday').provider('pikaday', function pikadayProviderFn() {
 
-      this.$get = function() {
-        return config;
-      };
+    /*jshint validthis: true */
 
-      this.setConfig = function setConfig(pikadayConfig) {
-        config = pikadayConfig;
-      };
+    var config = {};
 
-    })
-    .directive('pikaday', ['pikaday', function(pikaday) {
+    this.$get = function() {
+      return config;
+    };
+
+    this.setConfig = function setConfig(pikadayConfig) {
+      config = pikadayConfig;
+    };
+
+  });
+
+  angular.module('angularPikaday').directive('pikaday', ['pikaday', function pikadayDirectiveFn(pikaday) {
+
     return {
       restrict: 'A',
       scope: {
