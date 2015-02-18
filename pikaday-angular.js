@@ -18,6 +18,7 @@ angular.module('angularPikaday', [])
     restrict: 'A',
     scope: {
       pikaday: '=',
+      onSelect: '&'
     },
     link: function (scope, elem, attrs) {
 
@@ -46,6 +47,9 @@ angular.module('angularPikaday', [])
         showMonthAfterYear: attrs.showMonthAfterYear === 'true',
 
         onSelect: function () {
+          if ('onSelect' in attrs) {
+            scope.onSelect({ pikaday: this });
+          }
           setTimeout(function(){
             scope.$apply();
           });
