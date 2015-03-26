@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title>pikaday-angular</title>
+
+  <style type="text/css">
+
+  body {
+    padding: 50px 0 0 150px;
+  }
+
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="../node_modules/pikaday/css/pikaday.css">
+
+</head>
+<body ng-app="sampleApp" ng-controller="sampleController as sample">
+
+  <h2>Sample</h2>
+
+  <input pikaday="myPickerObject">
+
+  <script src="../node_modules/pikaday/pikaday.js"></script>
+  <script src="../node_modules/angular/angular.js"></script>
+  <script src="../pikaday-angular.js"></script>
+
+  <script>
+
+    angular.module('sampleApp', ['angularPikaday'])
+      .controller('sampleController', function() {
+
+
+      });
+
+  </script>
+
+</body>
+</html>
