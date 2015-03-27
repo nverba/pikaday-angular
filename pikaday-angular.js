@@ -27,7 +27,11 @@
 
         // Init config Object
 
-        var config = { field: elem[0] };
+        var config = { field: elem[0], onSelect: function () {
+          setTimeout(function(){
+            scope.$apply();
+          });
+        }};
 
         // Decorate config with globals
 
@@ -72,6 +76,9 @@
 
               config[attr] = function () {
                 scope[attr]({ pikaday: this });
+                setTimeout(function(){
+                  scope.$apply();
+                });
               };
               break;
 
