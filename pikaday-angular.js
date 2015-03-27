@@ -1,19 +1,19 @@
 (function () { 'use strict';
 
-  angular.module('pikaday', []);
-  angular.module('pikaday').provider('pikadayConfig', function pikadayProviderFn() {
+  angular.module('pikaday', [])
+    .provider('pikadayConfig', function pikadayProviderFn() {
 
-    var config = {};
+      var config = {};
 
-    this.$get = function() {
-      return config;
-    };
+      this.$get = function() {
+        return config;
+      };
 
-    this.setConfig = function setConfig(configs) {
-      config = configs;
-    };
-  });
-  angular.module('pikaday').directive('pikaday', ['pikadayConfig', pikadayDirectiveFn]);
+      this.setConfig = function setConfig(configs) {
+        config = configs;
+      };
+    })
+    .directive('pikaday', ['pikadayConfig', pikadayDirectiveFn]);
 
   function pikadayDirectiveFn(pikadayConfig) {
 
@@ -25,12 +25,14 @@
       },
       link: function (scope, elem, attrs) {
 
+        // Init confog Object
+
         var config = { field: elem[0] };
 
         // Decorate config with globals
 
         angular.forEach(pikadayConfig, function (value, key) {
-          if (key !== 'i18n') { config[key] = value; }
+          config[key] = value;
         });
 
         // Decorate/overide config with inline attributes
@@ -67,6 +69,7 @@
             case "onClose":
             case "onDraw":
             case "disableDayFn":
+
               config[attr] = function () {
                 scope[attr]({ pikaday: this });
               };
@@ -97,6 +100,15 @@
             case "container":
 
               config[attr] = document.getElementById(value);
+              break;
+
+            // Translations
+
+            case "i18n":
+
+                console.log(pikadayConfig.locales[value]);
+
+              config[attr] = pikadayConfig.locales[value];
 
           }
         }
