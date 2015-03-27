@@ -6,18 +6,17 @@ describe('directive: pikaday', function() {
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
 
-    element = '<input pikaday="myPickerObject">';
+    element = '<input pikaday="myPickerObject" number-of-months="2" >';
 
     element = $compile(element)(scope);
     scope.$digest();
 
   }));
 
+  describe('inline attribute', function() {
 
-  describe('with the first given value', function() {
-    it("should compute the size to create other values", function() {
-      var isolated = element.isolateScope();
-      assert.equal(-1, [1,2,3].indexOf(5));
+    it("number-of-months should be applied", function() {
+      assert.equal(scope.myPickerObject._o.numberOfMonths, 2);
     });
   });
 });
