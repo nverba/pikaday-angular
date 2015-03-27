@@ -3,6 +3,8 @@
   angular.module('pikaday', [])
     .provider('pikadayConfig', function pikadayProviderFn() {
 
+      // Create provider with getter and setter methods, allows setting of global configs
+
       var config = {};
 
       this.$get = function() {
