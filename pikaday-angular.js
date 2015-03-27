@@ -1,12 +1,7 @@
-(function () {
+(function () { 'use strict';
 
-  'use strict';
-
-  angular.module('angularPikaday', []);
-
-  angular.module('angularPikaday').provider('pikaday', function pikadayProviderFn() {
-
-    /*jshint validthis: true */
+  angular.module('pikaday', []);
+  angular.module('pikaday').provider('pikadayConfig', function pikadayProviderFn() {
 
     var config = {};
 
@@ -14,62 +9,93 @@
       return config;
     };
 
-    this.setConfig = function setConfig(pikadayConfig) {
-      config = pikadayConfig;
+    this.setConfig = function setConfig(configs) {
+      config = configs;
     };
-
   });
+  angular.module('pikaday').directive('pikaday', ['pikadayConfig', pikadayDirectiveFn]);
 
-  angular.module('angularPikaday').directive('pikaday', ['pikaday', function pikadayDirectiveFn(pikaday) {
+  function pikadayDirectiveFn(pikaday) {
 
     return {
+
       restrict: 'A',
       scope: {
-        pikaday: '=',
-        onSelect: '&'
+        pikaday: '=', onSelect: '&', onOpen: '&', onClose: '&', onDraw: '&', disableDayFn: '&'
       },
       link: function (scope, elem, attrs) {
 
-        var picker = new Pikaday({
+        var config = { field: elem[0] };
 
-          field: elem[0],
-          trigger: document.getElementById(attrs.triggerId),
-          bound: attrs.bound !== 'false',
-          position: attrs.position || '',
-          format: attrs.format || 'ddd MMM D YYYY', // Requires Moment.js for custom formatting
-          defaultDate: new Date(attrs.defaultDate),
-          setDefaultDate: attrs.setDefaultDate === 'true',
-          firstDay: attrs.firstDay ? parseInt(attrs.firstDay) : 0,
-          minDate: new Date(attrs.minDate),
-          maxDate: new Date(attrs.maxDate),
-          yearRange: attrs.yearRange ? JSON.parse(attrs.yearRange) : 10, // Accepts int (10) or 2 elem array ([1992, 1998]) as strings
-          isRTL: attrs.isRTL === 'true',
-          i18n: pikaday.i18n || {
-            previousMonth : 'Previous Month',
-            nextMonth     : 'Next Month',
-            months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
-            weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-            weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-          },
-          yearSuffix: attrs.yearSuffix || '',
-          showMonthAfterYear: attrs.showMonthAfterYear === 'true',
+        // Decorate config with attributes
 
-          onSelect: function () {
-            if ('onSelect' in attrs) {
-              scope.onSelect({ pikaday: this });
-            }
-            setTimeout(function(){
-              scope.$apply();
-            });
+        angular.forEach(attrs.$attr, function (elementAttribute) {
+
+          var attr = attrs.$normalize(elementAttribute); // ToCamelcase()
+
+          switch (attr) {
+
+            // Booleans, Integers & Arrays
+
+            case "setDefaultDate":
+            case "bound":
+            case "reposition":
+            case "disableWeekends":
+            case "showWeekNumber":
+            case "isRTL":
+            case "showMonthAfterYear":
+            case "firstDay":
+            case "yearRange":
+            case "numberOfMonths":
+            case "mainCalendar":
+
+              config[attr] = scope.$eval(attrs[attr]);
+              break;
+
+            // Functions
+
+            case "onSelect":
+            case "onOpen":
+            case "onClose":
+            case "onDraw":
+            case "disableDayFn":
+
+              config[attr] = function () {
+                scope[attr]({ pikaday: this });
+              };
+              break;
+
+            // Strings
+
+            case "format":
+            case "reposition":
+            case "theme":
+            case "yearSuffix":
+
+              config[attr] = attrs[attr];
+              break;
+
+            // Dates
+
+            case "minDate":
+            case "maxDate":
+            case "defaultDate":
+
+              config[attr] = new Date(attrs[attr]);
+              break;
+
+            // Elements
+
+            case "trigger":
+            case "container":
+
+              config[attr] = document.getElementById(attrs[attr]);
+
           }
         });
-        scope.pikaday = picker;
 
-        scope.$on('$destroy', function () {
-          picker.destroy();
-        });
+        scope.pikaday = new Pikaday(config);
       }
     };
-  }]);
-
+  }
 })();
