@@ -15,7 +15,7 @@
   });
   angular.module('pikaday').directive('pikaday', ['pikadayConfig', pikadayDirectiveFn]);
 
-  function pikadayDirectiveFn(pikaday) {
+  function pikadayDirectiveFn(pikadayConfig) {
 
     return {
 
@@ -27,12 +27,20 @@
 
         var config = { field: elem[0] };
 
-        // Decorate config with attributes
+        // Decorate config with globals
 
-        angular.forEach(attrs.$attr, function (elementAttribute) {
+        angular.forEach(pikadayConfig, function (value, key) {
+          if (key !== 'i18n') { config[key] = value; }
+        });
 
-          var attr = attrs.$normalize(elementAttribute); // ToCamelcase()
+        // Decorate/overide config with inline attributes
 
+        angular.forEach(attrs.$attr, function (dashAttr) {
+          var attr = attrs.$normalize(dashAttr); // normalize = ToCamelcase()
+          applyConfig(attr, attrs[attr]);
+        });
+
+        function applyConfig (attr, value) {
           switch (attr) {
 
             // Booleans, Integers & Arrays
@@ -49,7 +57,7 @@
             case "numberOfMonths":
             case "mainCalendar":
 
-              config[attr] = scope.$eval(attrs[attr]);
+              config[attr] = scope.$eval(value);
               break;
 
             // Functions
@@ -59,7 +67,6 @@
             case "onClose":
             case "onDraw":
             case "disableDayFn":
-
               config[attr] = function () {
                 scope[attr]({ pikaday: this });
               };
@@ -72,7 +79,7 @@
             case "theme":
             case "yearSuffix":
 
-              config[attr] = attrs[attr];
+              config[attr] = value;
               break;
 
             // Dates
@@ -81,7 +88,7 @@
             case "maxDate":
             case "defaultDate":
 
-              config[attr] = new Date(attrs[attr]);
+              config[attr] = new Date(value);
               break;
 
             // Elements
@@ -89,10 +96,10 @@
             case "trigger":
             case "container":
 
-              config[attr] = document.getElementById(attrs[attr]);
+              config[attr] = document.getElementById(value);
 
           }
-        });
+        }
 
         scope.pikaday = new Pikaday(config);
       }
