@@ -25,7 +25,7 @@
       },
       link: function (scope, elem, attrs) {
 
-        // Init confog Object
+        // Init config Object
 
         var config = { field: elem[0] };
 
@@ -35,10 +35,10 @@
           config[key] = value;
         });
 
-        // Decorate/overide config with inline attributes
+        // Decorate/Overide config with inline attributes
 
         angular.forEach(attrs.$attr, function (dashAttr) {
-          var attr = attrs.$normalize(dashAttr); // normalize = ToCamelcase()
+          var attr = attrs.$normalize(dashAttr); // normalize = ToCamelCase()
           applyConfig(attr, attrs[attr]);
         });
 
@@ -106,14 +106,18 @@
 
             case "i18n":
 
-                console.log(pikadayConfig.locales[value]);
-
               config[attr] = pikadayConfig.locales[value];
 
           }
         }
 
-        scope.pikaday = new Pikaday(config);
+        // instantiate pikaday with config, bind to scope, add destroy event callback
+
+        var picker = new Pikaday(config);
+        scope.pikaday = picker;
+        scope.$on('$destroy', function () {
+          picker.destroy();
+        });
       }
     };
   }
