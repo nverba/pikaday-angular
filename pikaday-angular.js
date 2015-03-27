@@ -87,7 +87,7 @@
             // Strings
 
             case "format":
-            case "reposition":
+            case "position":
             case "theme":
             case "yearSuffix":
 
