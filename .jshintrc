@@ -1,4 +1,4 @@
 {
   "browser": true,
-  "predef": [ "Pikaday", "angular" ]
+  "predef": [ "Pikaday" ]
 }

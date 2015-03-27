@@ -4,7 +4,7 @@
   "description": "an AngularJS directive wraper that aims to make using Pikaday with Angular as simple as possible.",
   "main": "pikaday-angular.js",
   "scripts": {
-    "test": "test/test.js"
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,13 @@
     "pikaday": "^1.3.2"
   },
   "devDependencies": {
-    "angular-mocks": "^1.3.15"
+    "angular-mocks": "^1.3.15",
+    "chai": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.5",
+    "karma-mocha": "^0.1.10",
+    "mocha": "^2.2.1"
   }
 }

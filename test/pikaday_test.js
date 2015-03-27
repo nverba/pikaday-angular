@@ -10,5 +10,14 @@ describe('directive: pikaday', function() {
 
     element = $compile(element)(scope);
     scope.$digest();
+
   }));
+
+
+  describe('with the first given value', function() {
+    it("should compute the size to create other values", function() {
+      var isolated = element.isolateScope();
+      assert.equal(-1, [1,2,3].indexOf(5));
+    });
+  });
 });
