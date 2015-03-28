@@ -77,10 +77,10 @@
             case "disableDayFn":
 
               config[attr] = function (value) {
-                scope[attr]({ pikaday: this, value: value });
                 setTimeout(function(){
                   scope.$apply();
                 });
+                return scope[attr]({ pikaday: this, value: value });
               };
               break;
 
