@@ -24,7 +24,7 @@
 
   <input pikaday="myPickerObject2" default-date="01/17/2007" set-default-date="true">
 
-  <input pikaday="myPickerObject3" number-of-months="2" disable-day-fn="sample.filterDays(value)" i18n="{{ sample.local }}">
+  <input pikaday="myPickerObject3" number-of-months="2" disable-day-fn="sample.filterDays(date)" i18n="{{ sample.local }}">
 
 
   <script src="../node_modules/pikaday/pikaday.js"></script>
@@ -63,8 +63,8 @@
           alert(pikaday.toString());
         };
 
-        this.filterDays = function filterDaysFn(day) {
-          return day.getDay() === 3;
+        this.filterDays = function filterDaysFn(date) {
+          return date.getDay() === 3;
         };
 
       });

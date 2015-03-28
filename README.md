@@ -68,7 +68,12 @@ To set the language with the `i18n` attribute, you must create a locales object,
 
 #### Functions
 
-Pikaday has several events you can bind callbacks to: `onSelect`, `onOpen`, `onClose` and `onDraw`. You can also pass a filter function to `disableDayFn`.
+Pikaday has several events you can bind callbacks to: `onSelect`, `onOpen`, `onClose`, `onDraw`, and `disableDayFn`. Callbacks can take two optional parameters:
+
+option        | value
+------------- | -------------
+`pikaday`     | Object: Pikaday
+date          | Object: Date
 
 Example:
 ```HTML
@@ -77,6 +82,9 @@ Example:
 
 <!-- scope syntax -->
 <input pikaday="myPicker" on-select="onPikadaySelect(pikaday)">
+
+<!-- passing date to filter fn -->
+<input pikaday="myPicker" on-disable-day="myDateFilter(date)">
 ```
 Then in your controller:
 ```
