@@ -20,11 +20,11 @@
 
   <h2>Sample</h2>
 
-  <input pikaday="myPickerObject"  on-select="sample.onPikadaySelect(pikaday)">
+  <input pikaday="myPickerObject1" on-select="sample.onPikadaySelect(pikaday)">
 
-  <input pikaday="myPickerObject" default-date="01/17/2007" set-default-date="true">
+  <input pikaday="myPickerObject2" default-date="01/17/2007" set-default-date="true">
 
-  <input pikaday="myPickerObject" number-of-months="2" i18n="{{ sample.local }}">
+  <input pikaday="myPickerObject3" number-of-months="2" disable-day-fn="sample.filterDays(value)" i18n="{{ sample.local }}">
 
 
   <script src="../node_modules/pikaday/pikaday.js"></script>
@@ -49,6 +49,9 @@
         pikaday.setConfig({
 
           locales: locales
+          // disableDayFn: function (day) {
+          //   console.log(arguments);
+          // }
 
         });
       }])
@@ -58,6 +61,10 @@
 
         this.onPikadaySelect = function onPikadaySelect(pikaday) {
           alert(pikaday.toString());
+        };
+
+        this.filterDays = function filterDaysFn(day) {
+          return day.getDay() === 3;
         };
 
       });
