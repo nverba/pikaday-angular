@@ -12,19 +12,19 @@ Then use the `pikaday` attribute to bind the picker to a scope.
 ```HTML
 <input pikaday="myPickerObject">
 ```
-You now have access to all of Pikaday's functions, such as `myPickerObject.getDate()`.
+You now have access to Pikaday's functions via the named scope model `myPickerObject`.
 
 #### Config
 
-Any of Pikaday's options can be passed as a string* to an attribute, the directive takes care of coercing the value to the proper type.
-<sub>*With the exception of callback function references.</sub>
+Any of Pikaday's options can be passed to an attribute, the directive takes care of coercing the value to the proper type*.
+<sub>*With the exception of expressions, which are bound to callbacks. see: [Functions](#functions) </sub>
 ```HTML
 <input pikaday="myPickerObject" number-of-months="2">
 ```
 
 #### Global config
 
-You can set a global config* object for all pickers by creating a `pikadayConfigProvider` module.
+Optionally, provide a global config* object for all pickers by creating a `pikadayConfigProvider`.
 <sub>*In-line attributes override global configs.</sub>
 
 ```JS
@@ -66,14 +66,14 @@ To set the language with the `i18n` attribute, you must create a locales object,
 }])
 ```
 
-#### Functions
+#### <a name="functions"></a>Functions
 
 Pikaday has several events you can bind callbacks to: `onSelect`, `onOpen`, `onClose`, `onDraw`, and `disableDayFn`. Callbacks can take two optional parameters:
 
-option        | value
+Option        | Value
 ------------- | -------------
 `pikaday`     | Object: Pikaday
-date          | Object: Date
+`date`        | Object: Date
 
 Example:
 ```HTML
