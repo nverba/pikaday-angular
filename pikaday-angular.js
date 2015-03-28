@@ -76,8 +76,8 @@
             case "onDraw":
             case "disableDayFn":
 
-              config[attr] = function (val) {
-                scope[attr]({ pikaday: this, val: val });
+              config[attr] = function (value) {
+                scope[attr]({ pikaday: this, value: value });
                 setTimeout(function(){
                   scope.$apply();
                 });
