@@ -24,7 +24,7 @@
 
   <input pikaday="myPickerObject" default-date="01/17/2007" set-default-date="true">
 
-  <input pikaday="myPickerObject" number-of-months="2" i18n="de">
+  <input pikaday="myPickerObject" number-of-months="2" i18n="{{ sample.local }}">
 
 
   <script src="../node_modules/pikaday/pikaday.js"></script>
@@ -48,12 +48,13 @@
 
         pikaday.setConfig({
 
-          i18n: locales.de,
           locales: locales
 
         });
       }])
       .controller('sampleController', function() {
+
+        this.local = "de";
 
         this.onPikadaySelect = function onPikadaySelect(pikaday) {
           alert(pikaday.toString());
