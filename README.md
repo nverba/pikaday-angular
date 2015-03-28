@@ -1,86 +1,110 @@
-## __pikaday-angular__ [working examples](http://nverba.github.io/pikaday-angular/)
-Tested and working with [Pikaday Release version 1.2.0](https://github.com/dbushell/Pikaday/releases/tag/1.2.0)
+### __pikaday-angular__ <sup>2.0.0 </sup>
+__pikaday-angular__ is an AngularJS directive wraper that aims to make using __[Pikaday](https://github.com/dbushell/Pikaday)__ with __[AngularJS](https://angularjs.org/)__ as simple as possible. [Examples &#8594;](http://nverba.github.io/pikaday-angular/)
 
-__pikaday-angular__ is an AngularJS directive wraper that aims to make using __Pikaday__ with __Angular__ as simple as possible, exposing __Pikaday's__ configurable features as HTML attributes, handled by the directive.
+__How simple?__  -  Include the pikaday-angular module as a dependency.
 
-### __Pikaday__ [source code & documentation](https://github.com/dbushell/Pikaday)
-
-
-## Basic usage
-
-Include the `angularPikaday` module as a dependency.
-
-```
-app = angular.module('YourApp', ['angularPikaday'])
+```HTML
+angular.module('YourApp', ['pikaday'])
 ```
 
-Include the `pikaday` attribute and assign a scope.
+Then use the `pikaday` attribute to bind the picker to a scope.
 
-``` language-HTML
+```HTML
 <input pikaday="myPickerObject">
 ```
+You now have access to all of Pikaday's functions, such as `myPickerObject.getDate()`.
 
-The date string returned to the input field will be pre-formatted by __Pikaday__, although formatting can be configured manually with the `format` attribute, if __moment.js__ is included.
+#### Config
 
-## i18n
-
-If you want to customize the used wordings, you can inject a custom object via the `pikadayProvider`.
-
-Example:
-
+Any of Pikaday's options can be passed as a string* to an attribute, the directive takes care of coercing the value to the proper type.
+<sub>*With the exception of callback function references.</sub>
+```HTML
+<input pikaday="myPickerObject" number-of-months="2">
 ```
-angular.module('YourApp', ['angularPikaday'])
-  .config(['pikadayProvider', function(pikadayProvider) {
-    pikadayProvider.setConfig({
-      i18n: {
-        previousMonth : 'Previous Month',
-        nextMonth     : 'Next Month',
-        months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
-        weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-      }
-  })
+
+#### Global config
+
+You can set a global config* object for all pickers by creating a `pikadayConfigProvider` module.
+<sub>*In-line attributes override global configs.</sub>
+
+```JS
+angular.module('YourApp')
+  .config(['pikadayConfigProvider', function(pikaday) {
+
+    pikaday.setConfig({
+
+      theme: 'material',
+      numberOfMonths: 1
+
+    });
+  }])
+```
+
+#### i18n
+
+To set the language with the `i18n` attribute, you must create a locales object, and pass it to `setConfig`. This makes setting locale using `i18n="de"` possible.
+
+```JS
+.config(['pikadayConfigProvider', function(pikaday) {
+
+  var locales = {
+    de: {
+      previousMonth : 'Vorheriger Monat',
+      nextMonth     : 'Nächster Monat',
+      months        : ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+      weekdays      : ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
+      weekdaysShort : ["So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."]
+    }
+  };
+
+  pikaday.setConfig({
+
+    i18n: locales.de, // sets the language globally [optional]
+    locales: locales // required if setting the language using the i18n attribute
+
+  });
 }])
 ```
 
+#### Functions
 
-## Methods
+Pikaday has several events you can bind callbacks to: `onSelect`, `onOpen`, `onClose` and `onDraw`. You can also pass a filter function to `disableDayFn`.
 
-__pikaday-angular__ binds the Pikaday picker object to the named scope and supports several methods for retrieving and updating the date.
+Example:
+```HTML
+<!-- controller as syntax -->
+<input pikaday="ctrl.myPicker" on-select="ctrl.onPikadaySelect(pikaday)">
 
-For example, the `myPickerObject.getDate()` method can be user to retrieve a JavaScript Date object, which can easily be formatted using Angular.js' built in formatters.
-
-
+<!-- scope syntax -->
+<input pikaday="myPicker" on-select="onPikadaySelect(pikaday)">
 ```
-<span> Date = {{ myPickerObject.getDate() | date:'MM/dd/yyyy' }}</span>
+Then in your controller:
 ```
-
-To see a complete list of methods available to the __Pikaday__ object, check out the [Pikaday README on Github](https://github.com/dbushell/Pikaday).
-
-## Available attributes
-
-__pikaday-angular__ accepts most of __Pikaday's__ configuration options as HTML attributes.
-
-- `trigger` use a different element to trigger opening the datepicker, see trigger example (defaults to directive DOM element)
-- `bound` automatically show/hide the datepicker on field focus (default true)
-- `position` preferred position of the datepicker relative to the form field, e.g.: top right, bottom right Note: automatic adjustment may occur to avoid datepicker from being displayed outside the viewport.
-- `format` the default output format for .toString() and field value (requires Moment.js for custom formatting)
-- `default-date` the initial date to view when first opened
-- `set-default-date` make the defaultDate the initial selected value
-- `first-day` first day of the week (0: Sunday, 1: Monday, etc)
-- `min-date` the minimum/earliest date that can be selected
-- `max-date` the maximum/latest date that can be selected
-- `year-range` number of years either side of the year select drop down (e.g. 10) or array of upper/lower range (e.g. [1900,2012])
-- `is-r-t-l` reverse the calendar for right-to-left languages (default false)
-- `year-suffix` additional text to append to the year in the title
-- `show-month-after-year` render the month after year in the title (default false)
-
-In addition a custom `onSelect` handler can be passed - it is invoked
-with the `Pikaday` instance as sole argument.
-
-```html
-<input pikaday="myPickerObject" on-select="onPikadaySelect(pikaday)">
+angular.module('YourApp')
+  .controller('sampleController', function() {
+    // use scope.onPikadaySelect for older scope syntax
+    this.onPikadaySelect = function onPikadaySelect(pikaday) {
+      alert(pikaday.toString());
+    };
+  });
 ```
 
+#### Moment.js
+If you load [Moment.js](http://momentjs.com/) in your HTML, Pikaday will use it automatically to parse input dates and format the pickers output. __If you are using Moment.js anywhere in your document, you must* specify the__ `format` __option, either in the global config or as an attribute.__
+<sub>__*__ Otherwise Moment.js will use some rather counter intuitive  [ISO8601](http://en.wikipedia.org/wiki/ISO_8601) compliant defaults `"YYYY-MM-DDTHH:mm:ssZ"`.</sub>
 
-Check out the [demo](http://nverba.github.io/pikaday-angular/) for some other examples.
+<sub>___Caveat:___ Whilst it's possible to specify some fancy output formats with Moment, it may have a detrimental effect on the users ability to enter a date in the input field, as Moment.js will expect the input to conform to the supplied format string. See [Moment's docs](http://momentjs.com/docs/#/parsing/string/) for clarification of some of the issues regarding date string parsing.</sub>
+
+#### Changelog
+
+v2.0.0: WARNING: BREAKING CHANGES
+
+ - Clarified naming of module and provider :
+ - Updated to support all Pikaday config options, functions and callbacks
+ - Any option can now be added via `pikadayConfigProvider`
+ - Added coercion tests `npm install; npm test`
+ - Removed all defaults (directive will only apply attributes that are present)
+ - Added multiple locale selection
+ - Updated README.md
+
+
