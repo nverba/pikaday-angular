@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>pikaday-angular by nverba</title>
+    <meta name="description" content="An AngularJS directive wraper for the Pikaday datepicker">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/pikaday.css">
+    <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+  </head>
+  <body>
+
+    <div id="hero">
+      <div class="wrap">
+        <div class="brand">
+          <img src="img/screenshot.png" class="screenshot" alt="Pikaday screenshot" />
+          <h1>pikaday-angular</h1>
+        </div>
+        <h4 class="tagline">An AngularJS directive wraper for the <a href="https://github.com/dbushell/Pikaday" target="_blank">Pikaday</a> datepicker</h4>
+        <a href="https://github.com/nverba/pikaday-angular" target="_blank" class="button github-button">View on GitHub</a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="wrap" ng-app="PikadayDemo">
+        <div id="output" ng-controller="Ctrl"></div>
+        <div id="marked">
+
+<!-- MARKDOWN CONTENT /////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- CLOSE MARKDOWN CONTENT ///////////////////////////////////////////////////////////////////////////// -->
+
+        </div>
+
+        <iframe id="i18n" src="frame.html"></iframe>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="wrap">
+        <p class="license">Code licensed under the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+      </div>
+    </div>
+
+    <script src="bower_components/marked/lib/marked.js"></script>
+    <script src="bower_components/highlightjs/highlight.pack.js"></script>
+
+    <script>
+        var markdown = document.getElementById("markdown");
+        var output   = document.getElementById("output");
+        output.innerHTML = marked(mark.innerHTML);
+
+        hljs.initHighlightingOnLoad();
+    </script>
+
+    <script src="bower_components/pikaday/pikaday.js"></script>
+    <script src="bower_components/pikaday-angular/pikaday-angular.js"></script>
+    <script src="js/app.js"></script>
+
+
+  </body>
+</html>

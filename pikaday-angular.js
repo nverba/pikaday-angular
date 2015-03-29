@@ -1,4 +1,16 @@
-(function () { 'use strict';
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['angular', 'pikaday'], factory);
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('angular'), require('pikaday'));
+  } else {
+    // Browser globals (root is window)
+    root.returnExports = factory(root.angular, root.Pikaday);
+  }
+}(this, function (angular, Pikaday) {
 
   angular.module('pikaday', [])
     .provider('pikadayConfig', function pikadayProviderFn() {
@@ -130,4 +142,5 @@
       }
     };
   }
-})();
+
+}));
