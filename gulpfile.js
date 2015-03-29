@@ -7,7 +7,7 @@ var markdown   = require('gulp-markdown');
 var inject     = require('gulp-inject');
 
 var paths = {
-  css: ["node_modules/pikaday-angular/node_modules/pikaday/css/pikaday.css"]
+  css: ["node_modules/pikaday-angular/node_modules/pikaday/css/pikaday.css", "node_modules/github-markdown-css/github-markdown.css"]
 };
 
 gulp.task('javascript', function () {
