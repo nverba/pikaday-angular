@@ -1,8 +1,4 @@
 require('angular');
-
-// angular-pikaday binds to the main angular object,
-// so does not need to be allocated to a variable.
-
 require('pikaday-angular');
 
 angular.module('exampleApp', ['pikaday'])
