@@ -68,11 +68,11 @@ To set the language with the `i18n` attribute, you must create a locales object,
 }])
 ```
 ## <a name="momentjs"></a>Moment.js
-If you load [Moment.js](http://momentjs.com/) anywhere your HTML, Pikaday will automatically start using Moment to parse input dates and format the pickers output. __If you are using Moment.js anywhere in your document, you should* specify the__ `format` __option, either in the global config or as an attribute.__
+If you load [Moment.js](http://momentjs.com/) anywhere in your HTML, Pikaday will automatically start using Moment to parse input dates and format the pickers output. __If you are using Moment.js anywhere in your document, you should* specify the__ `format` __option, either in the global config or as an attribute.__
 
 <sub> *Otherwise Moment.js will use some rather counter intuitive  [ISO8601](http://en.wikipedia.org/wiki/ISO_8601) compliant defaults `"YYYY-MM-DDTHH:mm:ssZ"`.</sub>
 
-<sub> ___Caveat:___ Whilst it's possible to specify some fancy output formats with Moment, it may have a detrimental effect on the users ability to enter a date in the input field, as Moment.js will expect the input to conform to the current format setting. See [Moment's docs](http://momentjs.com/docs/#/parsing/string/) for clarification of some of the issues regarding date string parsing. </sub>
+> ___Caveat:___ Whilst it's possible to specify some fancy output formats with Moment, it may have a detrimental effect on the users ability to enter a date in the input field, as Moment.js will expect the input to conform to the current format setting. See [Moment's docs](http://momentjs.com/docs/#/parsing/string/) for clarification of some of the issues regarding date string parsing.
 
 To get Moment.js to handle i18n output formatting, you need to load the appropriate Moment.js locale file. _Moment will automatically default to the most recently loaded locale file_. Explicit locale selection can be made programmatically by calling `moment.locale("<key>")` [with the key of a loaded locale](http://momentjs.com/docs/#/i18n/instance-locale/).
 
@@ -105,7 +105,22 @@ angular.module('YourApp')
   });
 ```
 
+## NPM & Bower
 
+```
+[npm || bower] install -save pikaday-angular
+```
+
+pikaday-angular is provided in a [UMD](https://github.com/umdjs/umd) wrapper, making it compatible with several build systems & preprocessors such as [Browserify](http://browserify.org/), see the [source of the Example page](https://github.com/nverba/pikaday-angular/tree/gh-pages) to see pikaday-angular being used with Browserify & Gulp.
+
+## Testing
+
+The coercion tests can be run after installing the required [npm](https://www.npmjs.com/) packages.
+```
+# From the command line:
+$ npm install
+$ npm test
+```
 ----------
 
 
