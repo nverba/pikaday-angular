@@ -1,13 +1,37 @@
-var browserify = require('browserify');
-var gulp       = require('gulp');
-var transform  = require('vinyl-transform');
-var uglify     = require('gulp-uglify');
-var concat     = require('gulp-concat');
-var markdown   = require('gulp-markdown');
-var inject     = require('gulp-inject');
+var browserify  = require('browserify');
+var gulp        = require('gulp');
+var transform   = require('vinyl-transform');
+var uglify      = require('gulp-uglify');
+var concat      = require('gulp-concat');
+var inject      = require('gulp-inject');
+var hljs        = require('highlight.js');
+var map         = require('vinyl-map');
+
+// Actual default values
+var md = require('markdown-it')({
+  html: true,
+  breaks: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+
+    try {
+      return hljs.highlightAuto(str).value;
+    } catch (__) {}
+
+    return ''; // use external default escaping
+  }
+});
 
 var paths = {
-  css: ["node_modules/pikaday-angular/node_modules/pikaday/css/pikaday.css", "node_modules/github-markdown-css/github-markdown.css"]
+  css: [
+    "src/*.css",
+    "node_modules/pikaday-angular/node_modules/pikaday/css/pikaday.css",
+    "node_modules/highlight.js/styles/default.css"
+  ]
 };
 
 gulp.task('javascript', function () {
@@ -33,15 +57,19 @@ gulp.task('css', function () {
 
 gulp.task('markdown', function () {
 
-  return gulp.src("src/*.md")
-    .pipe(markdown())
-    .pipe(gulp.dest('./tmp'));
+  var markdown = map(function(code) {
+    return md.render(code.toString());
   });
+
+  return gulp.src("src/*.md")
+    .pipe(markdown)
+    .pipe(gulp.dest('./tmp'));
+});
 
 gulp.task('index', ['markdown'], function () {
 
   var target  = gulp.src('./index.html');
-  var sources = gulp.src('./tmp/*.html');
+  var sources = gulp.src('./tmp/*.md');
 
   return target.pipe(inject(sources, {
     transform: function (filePath, file) {
