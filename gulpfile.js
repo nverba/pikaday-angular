@@ -31,7 +31,9 @@ var paths = {
     "src/*.css",
     "node_modules/pikaday-angular/node_modules/pikaday/css/pikaday.css",
     "node_modules/highlight.js/styles/default.css"
-  ]
+  ],
+  md: "src/*.md",
+  js: "./main.js"
 };
 
 gulp.task('javascript', function () {
@@ -41,7 +43,7 @@ gulp.task('javascript', function () {
     return b.bundle();
   });
 
-  return gulp.src('./main.js')
+  return gulp.src(paths.js)
     .pipe(browserified)
         // Add transformation tasks to the pipeline here.
     .pipe(uglify())
@@ -61,7 +63,7 @@ gulp.task('markdown', function () {
     return md.render(code.toString());
   });
 
-  return gulp.src("src/*.md")
+  return gulp.src(paths.md)
     .pipe(markdown)
     .pipe(gulp.dest('./tmp'));
 });
@@ -77,4 +79,10 @@ gulp.task('index', ['markdown'], function () {
     }
   }))
   .pipe(gulp.dest('./'));
+});
+
+gulp.task('watch', function() {
+  gulp.watch(paths.css, ['css']);
+  gulp.watch(paths.md, ['index']);
+  gulp.watch(paths.js, ['javascript']);
 });

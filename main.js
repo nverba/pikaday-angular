@@ -13,10 +13,8 @@ angular.module('exampleApp', ['pikaday'])
       }
     };
     pikaday.setConfig({
-      locales: locales
-      // disableDayFn: function (day) {
-      //   console.log(arguments);
-      // }
+      locales: locales,
+      format: 'MM/DD/YYYY'
     });
   }])
   .controller('exampleController', function() {
