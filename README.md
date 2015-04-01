@@ -1,8 +1,7 @@
+#### !!! There may be brief unavailability via Bower whilst I resolve some registry issues. !!!
+
 # __pikaday-angular__ <sup>v2.0.0 </sup>
 __pikaday-angular__ is a directive wraper that aims to make using __[Pikaday](https://github.com/dbushell/Pikaday)__ with __[AngularJS](https://angularjs.org/)__ as simple as possible. [Examples &#8594;](http://nverba.github.io/pikaday-angular/)
-
-#### !!! There may be brief unavailability via Bower whilst I resolve some registry issues.
-
 
 
 __How simple?__  -  Include the module as a dependency.
