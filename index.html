@@ -92,11 +92,9 @@ Filter: <code>disableDayFn</code></p>
 <p>You can access any of Pikaday's methods though the named scope, i.e. <code>myPickerObject</code>. For example, if you needed to apply a maximum date after the picker is initialised, you simply call the <code>setMaxDate()</code> method.</p>
 <pre><code>angular.module(<span class="hljs-string">'YourApp'</span>)
   .controller(<span class="hljs-string">'sampleController'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
-   
     <span class="hljs-keyword">this</span>.someFunction = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
       <span class="hljs-keyword">this</span>.myPickerObject.setMaxDate(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>( <span class="hljs-string">'01/01/2016'</span> ));
     };
-    
   });
 </code></pre>
 <p>Example: <input pikaday="example.myPickerObject5" default-date="01/01/2015" set-default-date="true"></p>
