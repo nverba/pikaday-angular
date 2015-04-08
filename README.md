@@ -15,7 +15,7 @@ Then use the `pikaday` attribute to bind the picker to a scope.
 ```
 You now have access to Pikaday's methods from the scoped object `myPickerObject`.
 
-## Config
+## Attributes
 
 Any of Pikaday's options can be passed to the corresponding attribute, the directive takes care of coercing the value to the proper type.*
 
@@ -34,14 +34,54 @@ Optionally, you may provide a global config* object for all pickers by creating 
 ```JS
 angular.module('YourApp')
   .config(['pikadayConfigProvider', function(pikaday) {
-
     pikaday.setConfig({
-
       numberOfMonths: 2
-
     });
   }])
 ```
+
+## <a name="functions"></a>Functions
+
+Pikaday has several events you can bind callbacks to: `onSelect`, `onOpen`, `onClose`, `onDraw`, and `disableDayFn`. Callbacks can be passed two optional, predefined parameters in the function expression:
+
+Option        | Type            | Description
+------------- | -------------   | ------------
+`pikaday`     | Object: Pikaday | The Pikaday object for the current input
+`date`        | Object: Date    | The current selected date, or date to be evaluated by the filter
+
+Example:
+```HTML
+<!-- controller as syntax - onSelect callback -->
+<input pikaday="ctrl.myPicker" on-select="ctrl.onPikadaySelect(pikaday)">
+
+<!-- scope syntax - passing date to filter Fn -->
+<input pikaday="myPicker" on-disable-day="myDateFilter(date)">
+
+```
+Then in your controller:
+```
+angular.module('YourApp')
+  .controller('sampleController', function() {
+    // use scope.onPikadaySelect for older scope syntax
+    this.onPikadaySelect = function onPikadaySelect(pikaday) {
+      alert(pikaday.toString());
+    };
+  });
+```
+
+## Methods
+
+You can access any of Pikaday's methods though the named scope, i.e. `myPickerObject`. For example, if you needed to apply a maximum date after the picker is initialised, you simply call the setMaxDate method.
+
+```
+angular.module('YourApp')
+  .controller('sampleController', function() {
+    this.someFunction = function () {
+	    this.myPickerObject.setMaxDate(new Date( '01/01/2016' ));
+    }
+  });
+```
+See [Pikaday's documentation](https://github.com/dbushell/Pikaday#methods) for a full list of available methods.
 
 ## i18n
 
@@ -76,35 +116,6 @@ If you load [Moment.js](http://momentjs.com/) anywhere in your HTML, Pikaday wil
 > ___Caveat:___ Whilst it's possible to specify some fancy output formats with Moment, it may have a detrimental effect on the users ability to enter a date in the input field, as Moment.js will expect the input to conform to the current format setting. See [Moment's docs](http://momentjs.com/docs/#/parsing/string/) for clarification of some of the issues regarding date string parsing.
 
 To get Moment.js to handle i18n output formatting, you need to load the appropriate Moment.js locale file. _Moment will automatically default to the most recently loaded locale file_. Explicit locale selection can be made programmatically by calling `moment.locale("<key>")` [with the key of a loaded locale](http://momentjs.com/docs/#/i18n/instance-locale/).
-
-## <a name="functions"></a>Functions
-
-Pikaday has several events you can bind callbacks to: `onSelect`, `onOpen`, `onClose`, `onDraw`, and `disableDayFn`. Callbacks can be passed two optional, predefined parameters in the function expression:
-
-Option        | Type            | Description
-------------- | -------------   | ------------
-`pikaday`     | Object: Pikaday | The Pikaday object for the current input
-`date`        | Object: Date    | The current selected date, or date to be evaluated by the filter
-
-Example:
-```HTML
-<!-- controller as syntax - onSelect callback -->
-<input pikaday="ctrl.myPicker" on-select="ctrl.onPikadaySelect(pikaday)">
-
-<!-- scope syntax - passing date to filter Fn -->
-<input pikaday="myPicker" on-disable-day="myDateFilter(date)">
-
-```
-Then in your controller:
-```
-angular.module('YourApp')
-  .controller('sampleController', function() {
-    // use scope.onPikadaySelect for older scope syntax
-    this.onPikadaySelect = function onPikadaySelect(pikaday) {
-      alert(pikaday.toString());
-    };
-  });
-```
 
 ## NPM & Bower
 
