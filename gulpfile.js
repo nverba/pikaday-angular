@@ -1,6 +1,7 @@
 var browserify  = require('browserify');
 var gulp        = require('gulp');
-var transform   = require('vinyl-transform');
+var source      = require('vinyl-source-stream');
+var streamify   = require('gulp-streamify');
 var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
 var inject      = require('gulp-inject');
@@ -36,18 +37,13 @@ var paths = {
   js: "./main.js"
 };
 
-gulp.task('javascript', function () {
-  // transform regular node stream to gulp (buffered vinyl) stream
-  var browserified = transform(function(filename) {
-    var b = browserify({entries: filename, debug: true});
-    return b.bundle();
-  });
-
-  return gulp.src(paths.js)
-    .pipe(browserified)
-        // Add transformation tasks to the pipeline here.
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/js/'));
+gulp.task('browserify', function() {
+  var bundleStream = browserify('./main.js').bundle();
+ 
+  bundleStream
+    .pipe(source('main.js'))
+    .pipe(streamify(uglify()))
+    .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('css', function () {
@@ -84,5 +80,5 @@ gulp.task('index', ['markdown'], function () {
 gulp.task('watch', function() {
   gulp.watch(paths.css, ['css']);
   gulp.watch(paths.md, ['index']);
-  gulp.watch(paths.js, ['javascript']);
+  gulp.watch(paths.js, ['browserify']);
 });
