@@ -12,7 +12,7 @@ Then use the `pikaday` attribute to bind the picker to a scope.
 ```HTML
 <input pikaday="myPickerObject">
 ```
-You now have access to Pikaday's functions from the scoped object `myPickerObject`.
+You now have access to Pikaday's methods from the scoped object `myPickerObject`.
 
 ## Config
 
@@ -41,6 +41,22 @@ angular.module('YourApp')
     });
   }])
 ```
+
+## Pikaday's native methods
+
+You can access any of Pikaday's methods though the named scope, i.e. `myPickerObject`. For example, if you needed to apply a maximum date after the picker is initialised, you simply call the setMaxDate method.
+
+```
+angular.module('YourApp')
+  .controller('sampleController', function() {
+   
+    this.someFunction = function () {
+	  this.myPickerObject.setMaxDate(new Date( '01/01/2016' ));
+    }
+    
+  });
+```
+See [Pikaday's documentation](https://github.com/dbushell/Pikaday#methods) for a full list of available methods.
 
 ## i18n
 
