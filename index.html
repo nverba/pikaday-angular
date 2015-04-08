@@ -12,11 +12,10 @@
 <body ng-app="exampleApp" ng-controller="exampleController as example" class="markdown-body">
 <div id="marked">
 <!-- inject:md -->
-<h1><strong>pikaday-angular</strong> <sup>v2.0.0 </sup></h1>
+<div class="partition"><h1><strong>pikaday-angular</strong> <sup>v2.0.0 </sup></h1>
 <p><a href="https://github.com/nverba/pikaday-angular"><strong>pikaday-angular</strong></a> is a directive wraper that aims to make using <strong><a href="https://github.com/dbushell/Pikaday">Pikaday</a></strong> with <strong><a href="https://angularjs.org/">AngularJS</a></strong> as simple as possible.</p>
-<hr>
-
-<h2><a name="basicusage"></a> Basic usage</h2>
+</div>
+<div class="partition"><h2><a name="basicusage"></a> Basic usage</h2>
 <pre><code class="language-js"><span class="hljs-comment">// Include the pikaday-angular module as a dependency.</span>
 angular.module(<span class="hljs-string">'YourApp'</span>, [<span class="hljs-string">'pikaday'</span>]);
 </code></pre>
@@ -27,14 +26,14 @@ angular.module(<span class="hljs-string">'YourApp'</span>, [<span class="hljs-st
 <pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">pikaday</span>=<span class="hljs-value">"example.myPickerObject"</span>&gt;</span> Date = </span><span class="hljs-expression">{{ <span class="hljs-variable">example.myPickerObject.getDate</span>() | <span class="hljs-variable">date</span>:'<span class="hljs-variable">fullDate</span>' }}</span><span class="xml">
 </span></code></pre>
 <p><strong>Example:</strong> <input pikaday="example.myPickerObject1"> Date = {{ example.myPickerObject1.getDate() | date:'fullDate' }}</p>
-
-<h2><a name="attributes"></a> Attributes</h2>
+</div>
+<div class="partition"><h2><a name="attributes"></a> Attributes</h2>
 <p>Any of Pikaday's configuration options can be passed to a corresponding attribute. pikaday-angular takes care of coercing the values to the proper type for boolean values and dates, and binds function expression references for callbacks. See <a href="#functions">Functions ⤵</a></p>
 <pre><code>&lt;input pikaday=<span class="hljs-string">"example.myPickerObject"</span> <span class="hljs-keyword">default</span>-<span class="hljs-built_in">date</span>=<span class="hljs-string">"01/03/1988"</span> <span class="hljs-keyword">set</span>-<span class="hljs-keyword">default</span>-<span class="hljs-built_in">date</span>=<span class="hljs-string">"true"</span>&gt;
 </code></pre>
 <p><strong>Example:</strong> <input pikaday="example.myPickerObject2" default-date="01/03/1988" set-default-date="true"></p>
-
-<h2><a name="globalconfig"></a> Global config</h2>
+</div>
+<div class="partition"><h2><a name="globalconfig"></a> Global config</h2>
 <p>You can configure all pickers globally by including a <code>pikadayConfigProvider</code> in you project.</p>
 <pre><code><span class="hljs-tag">angular</span><span class="hljs-class">.module</span>(<span class="hljs-string">'YourApp'</span>)
   <span class="hljs-class">.config</span>([<span class="hljs-string">'pikadayConfigProvider'</span>, <span class="hljs-function">function</span>(pikaday) {
@@ -47,8 +46,8 @@ angular.module(<span class="hljs-string">'YourApp'</span>, [<span class="hljs-st
 <pre><code>&lt;input <span class="hljs-variable">pikaday=</span><span class="hljs-string">"example.myPickerObject"</span> <span class="hljs-variable">format=</span><span class="hljs-string">"MMMM Do YYYY"</span>&gt;
 </code></pre>
 <p><strong>Example:</strong> <input pikaday="example.myPickerObject3" format="MMMM Do YYYY"></p>
-
-<h2><a name="functions"></a> Functions</h2>
+</div>
+<div class="partition"><h2><a name="functions"></a> Functions</h2>
 <p>Functions defined in the controller can be passed to Pikaday's defined events and filters as callbacks via attributes.<br>
 Available Events: <code>onSelect</code> <code>onOpen</code> <code>onClose</code> <code>onDraw</code><br>
 Filter: <code>disableDayFn</code></p>
@@ -88,8 +87,8 @@ Filter: <code>disableDayFn</code></p>
 <pre><code>&lt;input pikaday=<span class="hljs-string">"example.myPickerObject"</span> <span class="hljs-function_start"><span class="hljs-keyword">on</span></span>-select=<span class="hljs-string">"example.onPikadaySelect(pikaday)"</span>&gt;
 </code></pre>
 <p>Example: <input pikaday="example.myPickerObject4" on-select="example.onPikadaySelect(pikaday)"></p>
-
-<h2><a name="methods"></a> Methods</h2>
+</div>
+<div class="partition"><h2><a name="methods"></a> Methods</h2>
 <p>You can access any of Pikaday's methods though the named scope, i.e. <code>myPickerObject</code>. For example, if you needed to apply a maximum date after the picker is initialised, you simply call the <code>setMaxDate()</code> method.</p>
 <pre><code>angular.module(<span class="hljs-string">'YourApp'</span>)
   .controller(<span class="hljs-string">'sampleController'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
@@ -107,8 +106,8 @@ Filter: <code>disableDayFn</code></p>
   <input type="radio" name="date" value="01/01/2015" ng-focus="example.setMaxDateButton('06/06/2015')">01/01/2015
 </form>
 <p>See <a href="https://github.com/dbushell/Pikaday#methods">Pikaday's documentation</a> for a full list of available methods.</p>
-
-<h2><a name="i18n"></a> i18n</h2>
+</div>
+<div class="partition"><h2><a name="i18n"></a> i18n</h2>
 <p>To set the language with the <code>i18n</code> attribute, you must create a locales object, and pass it to <code>setConfig</code>. This makes setting locale using the attribute <code>i18n=&quot;de&quot;</code> possible. You may also want to configure Moment.js to handle formatting the output in the appropriate i18n locale. see: <a href="http://momentjs.com/docs/#/i18n/instance-locale/">Moment</a>.</p>
 <pre><code class="language-JS">.config([<span class="hljs-string">'pikadayConfigProvider'</span>, function(pikaday) {
 
@@ -134,7 +133,7 @@ Filter: <code>disableDayFn</code></p>
 <pre><code>&lt;input <span class="hljs-variable">pikaday=</span><span class="hljs-string">"example.myPickerObject"</span> <span class="hljs-variable">i18n=</span><span class="hljs-string">"de"</span>&gt;
 </code></pre>
 <p>Example: <input pikaday="example.myPickerObject5" i18n="de"></p>
-
+</div>
 <!-- endinject -->
 </div>
 <script src="dist/js/main.js"></script>

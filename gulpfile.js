@@ -30,7 +30,7 @@ var md = require('markdown-it')({
 var paths = {
   css: [
     "src/*.css",
-    "node_modules/pikaday-angular/node_modules/pikaday/css/pikaday.css",
+    "node_modules/pikaday/css/pikaday.css",
     "node_modules/highlight.js/styles/default.css"
   ],
   md: "src/*.md",
@@ -42,7 +42,7 @@ gulp.task('browserify', function() {
  
   bundleStream
     .pipe(source('main.js'))
-    .pipe(streamify(uglify()))
+    //.pipe(streamify(uglify()))
     .pipe(gulp.dest('./dist/js'));
 });
 
@@ -55,8 +55,11 @@ gulp.task('css', function () {
 
 gulp.task('markdown', function () {
 
+  var before = '<div class="partition">';
+  var after  = '</div>';
+
   var markdown = map(function(code) {
-    return md.render(code.toString());
+    return before + md.render(code.toString()) + after;
   });
 
   return gulp.src(paths.md)
