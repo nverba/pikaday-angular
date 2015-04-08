@@ -26,4 +26,8 @@ angular.module('exampleApp', ['pikaday'])
     this.filterDays = function filterDaysFn(date) {
       return date.getDay() === 3;
     };
+
+    this.setMaxDateButton = function (date) {
+      this.myPickerObject5.setMaxDate(new Date(date));
+    };
   });
