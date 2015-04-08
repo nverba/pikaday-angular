@@ -59,7 +59,7 @@ Example:
 
 ```
 Then in your controller:
-```
+```JS
 angular.module('YourApp')
   .controller('sampleController', function() {
     // use scope.onPikadaySelect for older scope syntax
@@ -73,7 +73,7 @@ angular.module('YourApp')
 
 You can access any of Pikaday's methods though the named scope, i.e. `myPickerObject`. For example, if you needed to apply a maximum date after the picker is initialised, you simply call the setMaxDate method.
 
-```
+```JS
 angular.module('YourApp')
   .controller('sampleController', function() {
     this.someFunction = function () {
