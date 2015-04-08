@@ -1,6 +1,7 @@
 # __pikaday-angular__ <sup>v2.0.0 </sup>
 __pikaday-angular__ is a directive wraper that aims to make using __[Pikaday](https://github.com/dbushell/Pikaday)__ with __[AngularJS](https://angularjs.org/)__ as simple as possible. [Examples &#8594;](http://nverba.github.io/pikaday-angular/)
 
+
 __How simple?__  -  Include the module as a dependency.
 
 ```HTML
@@ -124,7 +125,7 @@ angular.module('YourApp')
 ## NPM & Bower
 
 ```
-[npm || bower] install -save pikaday-angular
+[npm || bower] install --save pikaday-angular
 ```
 
 pikaday-angular is provided in a [UMD](https://github.com/umdjs/umd) wrapper, making it compatible with several build systems & preprocessors such as [Browserify](http://browserify.org/), see the [source of the Example page](https://github.com/nverba/pikaday-angular/tree/gh-pages) to see pikaday-angular being used with Browserify & Gulp.
