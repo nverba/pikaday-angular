@@ -77,7 +77,7 @@ You can access any of Pikaday's methods though the named scope, i.e. `myPickerOb
 angular.module('YourApp')
   .controller('sampleController', function() {
     this.someFunction = function () {
-	    this.myPickerObject.setMaxDate(new Date( '01/01/2016' ));
+      this.myPickerObject.setMaxDate(new Date( '01/01/2016' ));
     }
   });
 ```
