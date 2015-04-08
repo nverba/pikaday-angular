@@ -43,22 +43,6 @@ angular.module('YourApp')
   }])
 ```
 
-## Pikaday's native methods
-
-You can access any of Pikaday's methods though the named scope, i.e. `myPickerObject`. For example, if you needed to apply a maximum date after the picker is initialised, you simply call the setMaxDate method.
-
-```
-angular.module('YourApp')
-  .controller('sampleController', function() {
-   
-    this.someFunction = function () {
-	  this.myPickerObject.setMaxDate(new Date( '01/01/2016' ));
-    }
-    
-  });
-```
-See [Pikaday's documentation](https://github.com/dbushell/Pikaday#methods) for a full list of available methods.
-
 ## i18n
 
 To set the language with the `i18n` attribute, you must create a locales object, and pass it to `setConfig`. This makes setting locale using the attribute `i18n="de"` possible. You may also want to configure Moment.js to handle formatting the output in the appropriate i18n locale. see: [Moment](#momentjs).
