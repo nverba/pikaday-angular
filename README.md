@@ -2,6 +2,10 @@
 __pikaday-angular__ is a directive wraper that aims to make using __[Pikaday](https://github.com/dbushell/Pikaday)__ with __[AngularJS](https://angularjs.org/)__ as simple as possible. [Examples &#8594;](http://nverba.github.io/pikaday-angular/)
 
 
+## WARNING! This lib was made for a very old version of Angular.JS (v1.3.15) and, unfortunately, I no longer have time to maintain it.
+
+
+
 __How simple?__  -  Include the module as a dependency.
 
 ```HTML
